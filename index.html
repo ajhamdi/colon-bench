@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Colon-Bench: An Agentic Workflow for Scalable Dense Lesion Annotation in Full-Procedure Colonoscopy Videos.">
+  <meta name="keywords"
+    content="Colon-Bench, colonoscopy, lesion detection, polyp, segmentation, VQA, MLLM, agentic workflow, medical AI, benchmark">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Colon-Bench: An Agentic Workflow for Scalable Dense Lesion Annotation in Full-Procedure Colonoscopy Videos</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <!-- S2: Hero / Title -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">🔬 Colon-Bench: An Agentic Workflow for Scalable Dense Lesion
+              Annotation in Full-Procedure Colonoscopy Videos</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://abdullahamdi.com/">Abdullah Hamdi</a>,</span>
+              <span class="author-block">
+                Changchun Yang,</span>
+              <span class="author-block">
+                <a href="https://www.kaust.edu.sa/en/study/faculty/xin-gao">Xin Gao</a></span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">King Abdullah University of Science and Technology (KAUST)</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link -->
+                <span class="link-block">
+                  <a href="static/assets/colonbench.pdf"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- arXiv Link -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link (commented out) -->
+                <!-- <span class="link-block">
+                  <a href="https://youtu.be/PLACEHOLDER" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-youtube"></i></span>
+                    <span>Video</span>
+                  </a>
+                </span> -->
+                <!-- Code Link -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Data Link -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="far fa-images"></i></span>
+                    <span>Data</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S3: Teaser -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h2 class="subtitle has-text-centered" style="margin-bottom: 1rem;">
+          <b>Colon-Bench</b> is a comprehensive multi-task video benchmark for colonoscopy understanding,
+          spanning <b>14 lesion categories</b> with over <b>300k bounding boxes</b>, <b>213k segmentation masks</b>,
+          and <b>133k words</b> of clinical descriptions. Built via a novel <em>agentic annotation workflow</em>,
+          it enables rigorous evaluation of state-of-the-art MLLMs on lesion classification,
+          open-vocabulary video object segmentation, and video visual question answering.
+        </h2>
+        <video autoplay muted playsinline loop width="100%">
+          <source src="static/assets/supp_material/multi_clip_promotion.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- S4: Key Statistics -->
+  <section class="section stats-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-multiline is-centered has-text-centered">
+        <div class="column is-2">
+          <div class="stat-number" data-target="528">0</div>
+          <div class="stat-label">Videos</div>
+        </div>
+        <div class="column is-2">
+          <div class="stat-number" data-target="14">0</div>
+          <div class="stat-label">Lesion Categories</div>
+        </div>
+        <div class="column is-2">
+          <div class="stat-number" data-target="300" data-suffix="k+">0</div>
+          <div class="stat-label">Bounding Boxes</div>
+        </div>
+        <div class="column is-2">
+          <div class="stat-number" data-target="213" data-suffix="k+">0</div>
+          <div class="stat-label">Segmentation Masks</div>
+        </div>
+        <div class="column is-2">
+          <div class="stat-number" data-target="133" data-suffix="k+">0</div>
+          <div class="stat-label">Words of Text</div>
+        </div>
+        <div class="column is-2">
+          <div class="stat-number" data-target="23">0</div>
+          <div class="stat-label">Models Evaluated</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S5: Abstract -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Early screening via colonoscopy is critical for colon cancer prevention, yet developing robust AI systems
+              for this domain is hindered by the lack of densely annotated, long-sequence video datasets. Existing
+              datasets predominantly focus on single-class polyp detection and lack the rich spatial, temporal, and
+              linguistic annotations required to evaluate modern Multimodal Large Language Models (MLLMs). To address
+              this critical gap, we introduce <b>Colon-Bench</b>, generated via a novel multi-stage agentic workflow. Our
+              pipeline seamlessly integrates temporal proposals, bounding-box tracking, AI-driven visual confirmation,
+              and human-in-the-loop review to scalably annotate full-procedure videos. The resulting verified benchmark
+              is unprecedented in scope, encompassing <b>528 videos</b>, <b>14 distinct lesion categories</b> (including polyps,
+              ulcers, and bleeding), over <b>300,000 bounding boxes</b>, <b>213,000 segmentation masks</b>, and <b>133,000 words</b>
+              of clinical descriptions. We utilize Colon-Bench to rigorously evaluate state-of-the-art MLLMs across
+              lesion classification, Open-Vocabulary Video Object Segmentation (OV-VOS), and Visual Question Answering
+              (VQA). The MLLM results demonstrate surprisingly high localization performance in medical domains compared
+              to SAM-3. Finally, we analyze common VQA errors from MLLMs to introduce a novel "colon-skill" prompting
+              strategy, improving zero-shot MLLM performance by up to <b>9.7%</b> across most MLLMs.
+            </p>
+          </div>
+          <div class="keyword-tags">
+            <span class="tag is-medium is-info is-light">Colonoscopy</span>
+            <span class="tag is-medium is-info is-light">Lesion Detection</span>
+            <span class="tag is-medium is-info is-light">Polyps</span>
+            <span class="tag is-medium is-info is-light">MLLMs</span>
+            <span class="tag is-medium is-info is-light">Video Segmentation</span>
+            <span class="tag is-medium is-info is-light">VQA</span>
+            <span class="tag is-medium is-info is-light">Agentic Workflow</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S6: Pipeline Overview -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Pipeline Overview</h2>
+        </div>
+      </div>
+      <div class="content has-text-centered">
+        <img class="figure-img" src="static/assets/pipeline/pipeline.png" alt="Colon-Bench Pipeline" width="100%">
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              The Colon-Bench annotation pipeline operates in <b>three phases</b>:
+              <b>(1) Temporal Proposals:</b> A VLM detection agent scans full-procedure colonoscopy videos to identify
+              candidate lesion windows.
+              <b>(2) Spatial Annotation:</b> Bounding-box tracking via EdgeTAM and AI-driven confirmation with visual
+              cues add dense spatial annotations while progressively filtering false positives.
+              <b>(3) Human-in-the-Loop Review:</b> A reviewing physician validates the pre-rendered clips with spatial
+              overlays, rejecting only 11.6% of presented windows, demonstrating strong agreement with the AI filters.
+              The accepted annotations are then used to create a comprehensive Colon-Bench for MLLMs evaluations, covering
+              multiple video tasks: Visual Question Answering (VQA), binary lesion classification, and Open-Vocabulary
+              Video Object Segmentation (OV-VOS).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S7: Pipeline Video (commented out)
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Pipeline Walkthrough</h2>
+        </div>
+      </div>
+      <div class="content has-text-centered">
+        <video controls width="100%" preload="none" style="border-radius: 10px;">
+          <source src="static/assets/supp_material/complete%20pipeline%20website.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered" style="margin-top: 0.5rem;"><em>Complete pipeline demonstration showing each annotation stage.</em></p>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- S8: Dataset Comparison (Table 1) -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Dataset Comparison</h2>
+          <p class="subtitle is-6">Table 1. Colon-Bench provides a broader lesion taxonomy and richer supervision compared to prior colonoscopy datasets.</p>
+        </div>
+      </div>
+      <div class="table-container">
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth bench-table">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th><a href="https://datasets.simula.no/kvasir-seg/" target="_blank">Kvasir-SEG</a></th>
+              <th><a href="http://amed8k.sundatabase.org/" target="_blank">SUN</a></th>
+              <th><a href="https://github.com/DebeshJha/PolypGen" target="_blank">PolypGen</a></th>
+              <th><a href="https://www.nature.com/articles/s41597-024-03359-0" target="_blank">REAL-Colon</a></th>
+              <th><a href="https://www.nature.com/articles/s41597-024-03359-0" target="_blank">CAS-Colon</a></th>
+              <th class="highlight-col">Colon-Bench (Ours)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Year</td><td>2020</td><td>2021</td><td>2023</td><td>2024</td><td>2025</td>
+              <td class="highlight-col">2026</td>
+            </tr>
+            <tr>
+              <td>Focus</td><td>Segmentation</td><td>Detection</td><td>Segmentation</td><td>Detection</td><td>Anatomy</td>
+              <td class="highlight-col">Lesion, Video Segmentation, &amp; Text</td>
+            </tr>
+            <tr>
+              <td>Number of Videos</td><td>N/A</td><td>N/A</td><td>N/A</td><td>60</td><td>78</td>
+              <td class="highlight-col"><b>528</b></td>
+            </tr>
+            <tr>
+              <td>Total Frames/Images</td><td>1,000</td><td>158,690</td><td>6,282</td><td>2,757,723</td><td>1,961,100</td>
+              <td class="highlight-col"><b>464,035</b></td>
+            </tr>
+            <tr>
+              <td>Lesion Classes</td><td>1 (Polyp)</td><td>1 (Polyp)</td><td>1 (Polyp)</td><td>1 (Polyp)</td><td>N/A</td>
+              <td class="highlight-col"><b>14</b></td>
+            </tr>
+            <tr>
+              <td>Bounding Boxes</td><td>N/A</td><td>158,690</td><td>6,282</td><td>351,264</td><td>N/A</td>
+              <td class="highlight-col"><b>300,132</b></td>
+            </tr>
+            <tr>
+              <td>Segmentation Masks</td><td>1,000</td><td>N/A</td><td>6,282</td><td>N/A</td><td>Yes</td>
+              <td class="highlight-col"><b>213,067</b></td>
+            </tr>
+            <tr>
+              <td>Language Descriptions</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td>
+              <td class="highlight-col"><b>Yes (133k Words)</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- S9: Lesion Categories -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Lesion Categories</h2>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              The dataset spans <b>14 lesion categories</b> identified through multi-label keyword matching over
+              clinician-verified text fields: Sessile Polyps (411), Bleeding (252), Ulcers (160), Erythematous (112),
+              Tumors (86), LST/Flat Polyps (85), Pedunculated Polyps (72), Angiectasia (55), Diverticulum (51),
+              Mucosal Abnormalities (51), Crohn's (7), Hemorrhoids (5), Parasites (4), and Other (1).
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content has-text-centered">
+        <img class="figure-img" src="static/assets/distribution/lesion_distribution.png" alt="Lesion Distribution and Qualitative Results" width="100%">
+      </div>
+    </div>
+  </section>
+
+  <!-- S10: Annotation Pipeline Stages (Table 2) - commented out
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Annotation Pipeline Stages</h2>
+          <p class="subtitle is-6">Table 2. Progressive filtering across pipeline stages increases precision while adding dense annotations.</p>
+        </div>
+      </div>
+      <div class="table-container">
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth bench-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Initial VLM Proposals</th>
+              <th>After Video Verification</th>
+              <th>After Cued AI Confirmation</th>
+              <th class="highlight-col">Final Human-Curated</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Total Windows</td><td>1,325</td><td>903</td><td>597</td>
+              <td class="highlight-col"><b>528</b></td>
+            </tr>
+            <tr>
+              <td>Total Frames</td><td>826,763</td><td>648,440</td><td>492,606</td>
+              <td class="highlight-col"><b>464,035</b></td>
+            </tr>
+            <tr>
+              <td>Duration (Hours)</td><td>22.97</td><td>18.01</td><td>13.68</td>
+              <td class="highlight-col"><b>12.89</b></td>
+            </tr>
+            <tr>
+              <td>Bounding Boxes</td><td>&mdash;</td><td>&mdash;</td><td>314,408</td>
+              <td class="highlight-col"><b>300,132</b></td>
+            </tr>
+            <tr>
+              <td>Segmentation Masks</td><td>&mdash;</td><td>&mdash;</td><td>227,343</td>
+              <td class="highlight-col"><b>213,067</b></td>
+            </tr>
+            <tr>
+              <td>Clinical Words</td><td>&mdash;</td><td>&mdash;</td><td>145,515</td>
+              <td class="highlight-col"><b>133,289</b></td>
+            </tr>
+            <tr>
+              <td>Precision</td><td>30.9</td><td>36.2</td><td>53.1</td>
+              <td class="highlight-col"><b>55.4</b></td>
+            </tr>
+            <tr>
+              <td>Recall</td><td>67.5</td><td>68.7</td><td>48.8</td>
+              <td class="highlight-col">48.6</td>
+            </tr>
+            <tr>
+              <td>F1 Score</td><td>42.4</td><td>47.4</td><td>50.8</td>
+              <td class="highlight-col"><b>51.8</b></td>
+            </tr>
+            <tr>
+              <td>Specificity</td><td>78.6</td><td>82.9</td><td>93.9</td>
+              <td class="highlight-col"><b>94.4</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- S11: Main Results (Table 3) -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Colon-Bench Leaderboard</h2>
+          <p class="subtitle is-6">Summary of model performance across the four benchmark tasks: visual prompted and unprompted video Visual Question Answering (VQA) accuracy (with visual box prompts and without them), binary lesion classification precision/recall/F1, and open-vocabulary video segmentation IoU/Dice. The video segmentation is based on 3 box detections from each MLLM prompting the same EdgeTAM tracker. Best scores per metric are shown in <span class="best-score">bold green</span>.</p>
+        </div>
+      </div>
+      <div class="table-container">
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth bench-table">
+          <thead>
+            <tr>
+              <th rowspan="2">Model</th>
+              <th colspan="2">VQA Accuracy</th>
+              <th colspan="4">Lesion Classification</th>
+              <th colspan="2">Segmentation</th>
+            </tr>
+            <tr>
+              <th>Prompted</th>
+              <th>Unprompted</th>
+              <th>Accuracy</th>
+              <th>Precision</th>
+              <th>Recall</th>
+              <th>F1</th>
+              <th>IoU</th>
+              <th>Dice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CLIP</td><td>&mdash;</td><td>&mdash;</td><td>34.7</td><td>34.5</td><td>100</td><td>51.3</td>
+              <td>&mdash;</td><td>&mdash;</td>
+            </tr>
+            <tr>
+              <td>ViCLIP</td><td>&mdash;</td><td>&mdash;</td><td>35.8</td><td>34.8</td><td>98.5</td><td>51.4</td>
+              <td>&mdash;</td><td>&mdash;</td>
+            </tr>
+            <tr>
+              <td>Endo-CLIP</td><td>&mdash;</td><td>&mdash;</td><td>52.9</td><td>41.9</td><td>95.2</td><td>58.2</td>
+              <td>&mdash;</td><td>&mdash;</td>
+            </tr>
+            <tr>
+              <td>Colon-ViCLIP</td><td>&mdash;</td><td>&mdash;</td><td>64.4</td><td>49.0</td><td>84.2</td><td>62.0</td>
+              <td>&mdash;</td><td>&mdash;</td>
+            </tr>
+            <tr>
+              <td>SAM 3</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+              <td>2.5</td><td>2.9</td>
+            </tr>
+            <tr>
+              <td>GPT-4o</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+              <td>0.5</td><td>0.8</td>
+            </tr>
+            <tr>
+              <td>Claude Opus 4.6</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+              <td>16.1</td><td>20.5</td>
+            </tr>
+            <tr>
+              <td>GPT-5.2</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+              <td>30.7</td><td>36.5</td>
+            </tr>
+            <tr>
+              <td>GPT-5.4</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+              <td>34.5</td><td>41.1</td>
+            </tr>
+            <tr>
+              <td>Qwen3-VL 8B</td><td>32.9</td><td>38.3</td><td>34.4</td><td>34.4</td><td>100</td><td>51.2</td>
+              <td>10.4</td><td>13.1</td>
+            </tr>
+            <tr>
+              <td>Seed 1.6 Flash</td><td>38.1</td><td>45.4</td><td>72.9</td><td class="best-score">94.2</td><td>24.3</td><td>38.6</td>
+              <td>2.6</td><td>3.5</td>
+            </tr>
+            <tr>
+              <td>Qwen-VL Max</td><td>39.1</td><td>45.4</td><td>65.6</td><td>0.0</td><td>0.0</td><td>0.0</td>
+              <td>25.6</td><td>29.6</td>
+            </tr>
+            <tr>
+              <td>Qwen3-VL 32B</td><td>39.3</td><td>44.4</td><td>65.6</td><td>0.0</td><td>0.0</td><td>0.0</td>
+              <td>12.7</td><td>15.9</td>
+            </tr>
+            <tr>
+              <td>Qwen3.5 Plus</td><td>44.3</td><td>60.5</td><td>59.1</td><td>36.2</td><td>24.6</td><td>29.3</td>
+              <td>16.7</td><td>21.0</td>
+            </tr>
+            <tr>
+              <td>Molmo 2-8B</td><td>46.1</td><td>53.4</td><td>67.3</td><td>52.9</td><td>46.7</td><td>49.6</td>
+              <td>2.6</td><td>3.8</td>
+            </tr>
+            <tr>
+              <td>Qwen3-VL 235B</td><td>46.7</td><td>56.6</td><td>64.9</td><td>22.2</td><td>0.7</td><td>1.4</td>
+              <td>13.6</td><td>16.9</td>
+            </tr>
+            <tr>
+              <td>Gemini 2.5 Flash Lite</td><td>47.8</td><td>46.8</td><td>52.3</td><td>42.3</td><td>95.9</td><td>58.7</td>
+              <td>19.9</td><td>24.3</td>
+            </tr>
+            <tr>
+              <td>Qwen3.5 397B</td><td>49.0</td><td>60.1</td><td>64.6</td><td>10.0</td><td>0.4</td><td>0.7</td>
+              <td>16.6</td><td>21.0</td>
+            </tr>
+            <tr>
+              <td>GLM-4.6V</td><td>55.7</td><td>53.8</td><td>60.6</td><td>46.5</td><td>94.1</td><td>62.2</td>
+              <td>12.5</td><td>16.1</td>
+            </tr>
+            <tr>
+              <td>Seed 1.6</td><td>62.9</td><td>72.0</td><td>82.0</td><td>85.0</td><td>58.7</td><td>69.4</td>
+              <td>12.6</td><td>16.1</td>
+            </tr>
+            <tr>
+              <td>Gemini 3.1 Flash Lite</td><td>69.2</td><td>67.7</td><td class="best-score">85.1</td><td>72.6</td><td>90.8</td><td class="best-score">80.7</td>
+              <td>37.4</td><td>43.4</td>
+            </tr>
+            <tr>
+              <td>Gemini 3 Flash</td><td>76.6</td><td>76.0</td><td>72.0</td><td>55.3</td><td>97.1</td><td>70.5</td>
+              <td class="best-score">48.3</td><td class="best-score">54.7</td>
+            </tr>
+            <tr>
+              <td>Gemini 3 Pro</td><td class="best-score">78.6</td><td class="best-score">82.5</td><td>81.1</td><td>66.1</td><td>93.0</td><td>77.3</td>
+              <td>45.0</td><td>51.3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- S12: Results Visualization (Tabs) -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Results Visualization</h2>
+        </div>
+      </div>
+      <div class="tabs is-centered is-boxed is-medium" id="results-tabs">
+        <ul>
+          <li class="is-active" data-tab="tab-vqa"><a>VQA Results</a></li>
+          <li data-tab="tab-segmentation"><a>Segmentation</a></li>
+          <li data-tab="tab-classification"><a>Lesion Classification</a></li>
+        </ul>
+      </div>
+      <div class="tab-content">
+        <div id="tab-vqa" class="tab-pane is-active">
+          <div class="content has-text-centered">
+            <p><em>Detailed VQA results for prompted and unprompted splits.</em></p>
+            <img class="figure-img" src="static/assets/results/vqa-prompted-figure.png"
+              alt="VQA Prompted Results" width="100%" style="margin-bottom: 1rem;">
+            <img class="figure-img" src="static/assets/results/vqa-unprompted-figure.png"
+              alt="VQA Unprompted Results" width="100%">
+          </div>
+        </div>
+        <div id="tab-segmentation" class="tab-pane" style="display:none;">
+          <div class="content has-text-centered">
+            <p><em>MLLM-based segmentation benchmark. Gemini 3 Flash achieves 48.3% mIoU, beating SAM-3 (2.5%) by a wide margin.</em></p>
+            <img class="figure-img" src="static/assets/results/segmentation-figure.png"
+              alt="Segmentation Benchmark Results" width="100%">
+          </div>
+        </div>
+        <div id="tab-classification" class="tab-pane" style="display:none;">
+          <div class="content has-text-centered">
+            <p><em>Binary lesion classification accuracy (%) on the Colon-Bench classification benchmark (790 records) is computed after each model predicts whether a lesion is present (positive) or absent (negative). Accuracy is computed over all records; unevaluated records count as incorrect. The dashed red line indicates the 50% random-chance baseline. Models are ordered by accuracy (highest first), and colours denote model family.</em></p>
+            <img class="figure-img" src="static/assets/results/classification-figure.png"
+              alt="Classification Accuracy Results" width="100%" style="margin-bottom: 1rem;">
+            <img class="figure-img" src="static/assets/results/classification-precision-figure.png"
+              alt="Classification Precision, Recall, F1 Results" width="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparisons Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Comparisons</h2>
+        </div>
+      </div>
+      <div class="tabs is-centered is-boxed is-medium" id="comparisons-tabs">
+        <ul>
+          <li class="is-active" data-tab="tab-comp-detection"><a>Detection</a></li>
+          <li data-tab="tab-comp-segmentation"><a>Segmentation</a></li>
+        </ul>
+      </div>
+      <div class="tab-content">
+        <div id="tab-comp-detection" class="tab-pane is-active">
+          <div class="content has-text-centered">
+            <p><em>Colon-Bench Qualitative Detection Comparisons. Each row shows a different colonoscopy video frame: (1) erythematous region, (2) bleeding, (3) tumor, (4) ulcer, (5) pedunculated polyp, (6) sessile polyp. Columns show the input, ground-truth bounding box, and predictions from each model. Correct detections are in green; false positives are in red. These detections are used in the downstream box-level detection or prompted VQA via the FlipTAM tracker.</em></p>
+            <img class="figure-img" src="static/assets/comparison/qualitiive-detection.png"
+              alt="Detection Comparisons" width="100%">
+          </div>
+        </div>
+        <div id="tab-comp-segmentation" class="tab-pane" style="display:none;">
+          <div class="content has-text-centered">
+            <p><em>Colon-Bench Qualitative Segmentation Comparisons. Each row shows a different colonoscopy video frame: (1) erythematous region, (2) tumor, (3) bleeding, (4) sessile polyp, (5) angiectasia. Columns show the input, ground-truth mask overlay, and predicted mask overlays from each model (including SAM2). Masks are overlaid as semi-transparent purple regions.</em></p>
+            <img class="figure-img" src="static/assets/comparison/qualitiive-segmentation.png"
+              alt="Segmentation Comparisons" width="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S13: Colon-Skill -->
+  <section class="section colon-skill-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Colon-Skill</h2>
+          <p class="subtitle is-6">
+            We analyze common VQA errors from MLLMs to construct a novel <b>colon-skill</b> prompting strategy &mdash;
+            a structured <code>SKILL.md</code> context file extracted by analyzing error patterns across lesion categories
+            and failure modes. This skill is augmented to the MLLMs during VQA benchmarking, improving zero-shot performance by up to <b>9.7%</b>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Skill Card -->
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <span class="skill-card-icon"><i class="fas fa-file-code"></i></span>
+          <span class="skill-card-title">SKILL.md &mdash; Colon-Skill</span>
+        </div>
+        <div class="skill-card-body">
+          <div class="skill-section">
+            <h4 class="skill-heading">Universal Anti-Error Rules</h4>
+            <ul class="skill-list">
+              <li><strong>Do not hallucinate stalks:</strong> The most common morphological error is calling a sessile (broad-based) polyp "pedunculated." If the lesion sits flatly on a haustral fold without a distinct, narrowed fibrous tether, it is a sessile or flat-elevated lesion.</li>
+              <li><strong>Correctly interpret NBI (Narrow-Band Imaging):</strong> Under NBI, healthy mucosa appears greenish/cyan. Adenomas typically appear brownish with regular pit patterns, while hyperplastic or SSLs appear pale or whitish. Do not confuse white-light colors with NBI colors.</li>
+              <li><strong>Differentiate holes from masses:</strong> Models consistently mistake diverticula (dark, hollow outpouchings) for depressed flat lesions or dark polyps. If a finding is a perfectly circular dark shadow with smooth margins, it is a hole/pocket, not a lesion.</li>
+              <li><strong>Be conservative with size estimates:</strong> Models routinely overestimate diminutive lesions. Without tool reference, subtle, dome-shaped nodules on folds are usually 3&ndash;5mm (diminutive). Lesions occupying a large portion of the lumen are &gt;15mm.</li>
+              <li><strong>Accurately identify interventions:</strong>
+                <ul>
+                  <li><em>Water jet:</em> Used for irrigation/clearing mucus or blood (not for coagulation).</li>
+                  <li><em>Needle catheter:</em> Injects fluid to create a blue submucosal cushion (lifts flat lesions).</li>
+                  <li><em>Cold/Hot Snare:</em> Wire loop used for Endoscopic Mucosal Resection (EMR) or polypectomy.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="skill-section">
+            <h4 class="skill-heading">Lesion Morphology Cues by Category</h4>
+            <ul class="skill-list">
+              <li><strong>Sessile Polyps (Paris Is / IIa):</strong> Broad base, typically on the crest of a haustral fold. Often pale, isochromatic, or slightly yellowish. Surface is smooth or subtly granular.</li>
+              <li><strong>Sessile Serrated Lesions (SSL):</strong> Flat, subtle, pale/isochromatic. Key visual signatures include a "cloud-like" surface texture, indistinct/blurred borders, and a distinct "mucus cap."</li>
+              <li><strong>Angioectasia / Angiodysplasia:</strong> Completely flush with mucosa. Bright, cherry-red, "fern-like" or stellate pattern of tortuous, dilated submucosal blood vessels.</li>
+              <li><strong>Pedunculated Polyps (Paris Ip):</strong> Distinct stalk attached to the colonic wall. Head is bulbous, multi-lobulated, and noticeably redder than the stalk.</li>
+              <li><strong>Ulcers:</strong> Deep or shallow punched-out depressions. White/yellow necrotic slough or fibrin exudate in the center, surrounded by raised, rolled, erythematous margins.</li>
+              <li><strong>Diverticula:</strong> Distinct, dark, circular pockets with smooth, well-defined rims. Often seen in clusters.</li>
+            </ul>
+          </div>
+          <div class="skill-section">
+            <h4 class="skill-heading">Common Confusion Traps</h4>
+            <ul class="skill-list">
+              <li><strong>Angioectasia vs. Suction Artifact vs. Dieulafoy:</strong> Suction artifacts are tiny, non-specific red spots. Dieulafoy/ulcers involve tissue defects. Angioectasia is a flat network of <em>fern-like</em>, branching dilated vessels without a mucosal defect.</li>
+              <li><strong>Diverticulum vs. Depressed Lesion (Paris IIc):</strong> A diverticulum is a true anatomical hole (deep black center). A Paris IIc lesion is a mucosal depression with a visible base and irregular margins.</li>
+              <li><strong>Mischaracterizing pale flat lesions:</strong> If a flat lesion is pale with a "cloud-like" surface and lacks rolled margins or central necrosis, it is an SSL, not an ulcer or tumor.</li>
+              <li><strong>"Lobulated" vs. "Smooth" surface:</strong> Smooth dome-shaped pale nodules are typically hyperplastic or small sessile polyps. Lobulated/cerebriform surfaces with redder hues indicate adenomatous polyps.</li>
+              <li><strong>Anatomical folds mistaken for masses:</strong> Prominent haustral folds curve predictably. Do not label a normal fold as a "sessile mass" unless there is a localized change in color, vascularity, or elevation.</li>
+            </ul>
+          </div>
+          <div class="skill-section">
+            <h4 class="skill-heading">Fast VQA Decision Checklist</h4>
+            <ol class="skill-checklist">
+              <li><strong>Assess the geometry:</strong> Mass (protruding), defect (depressed/ulcerated), hole (diverticulum), or flat vascular anomaly?</li>
+              <li><strong>Evaluate the attachment:</strong> Broadly attached to a fold (sessile) or hanging by a tether (pedunculated)?</li>
+              <li><strong>Check the lighting mode:</strong> White light (pink/red hues) or NBI/BLI (green/brown/cyan hues)?</li>
+              <li><strong>Examine the surface &amp; margins:</strong> Smooth, cloud-like, granular, or lobulated? Margins sharp, rolled, or indistinct?</li>
+              <li><strong>Identify active tools or residue:</strong> Mucus/stool, active bleeding, wire loop (snare), or blue fluid (submucosal injection)?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <p class="has-text-centered" style="margin-top: 0.75rem; color: #64748b;">
+        <em><b>Colon-Skill.</b> The <code>SKILL.md</code> file used as context augmented to the MLLMs in the VQA benchmarks.
+        The skill is extracted by analysing error patterns under lesion categories and examples of failure modes.</em>
+      </p>
+
+      <!-- Colon-Skill Results -->
+      <div class="columns is-centered has-text-centered" style="margin-top: 3rem;">
+        <div class="column">
+          <h3 class="title is-4">Colon-Skill Results</h3>
+        </div>
+      </div>
+      <div class="content has-text-centered">
+        <p><em>Colon-Skill improves prompted VQA accuracy by up to 9.7%.</em></p>
+        <img class="figure-img" src="static/assets/skills/main-colon-skill-figure.png"
+          alt="Colon-Skill VQA Results" width="100%">
+      </div>
+
+      <!-- Ablation Studies - commented out
+      <div class="columns is-centered has-text-centered" style="margin-top: 3rem;">
+        <div class="column">
+          <h3 class="title is-4 expandable-toggle" data-target="ablation-content">
+            Ablation Studies <span class="chevron">&#9660;</span>
+          </h3>
+        </div>
+      </div>
+      <div id="ablation-content" class="expandable-section">
+        <div class="content has-text-centered">
+          <p><em>Pipeline stage ablation on temporal detection metrics.</em></p>
+          <img class="figure-img" src="static/assets/ablation/ablation-figure-segmentation-frames.png"
+            alt="Pipeline Ablation" width="100%">
+        </div>
+        <div class="columns is-centered has-text-centered" style="margin-top: 2rem;">
+          <div class="column">
+            <h4 class="title is-5">Pipeline Stage Ablation (Table 7)</h4>
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth bench-table">
+            <thead>
+              <tr>
+                <th rowspan="2">Pipeline Stage</th>
+                <th colspan="4">Temporal (Frame-level)</th>
+                <th colspan="4">Spatial (Bounding Box)</th>
+              </tr>
+              <tr>
+                <th>Precision</th><th>Recall</th><th>F1</th><th>Specificity</th>
+                <th>F1@.25</th><th>F1@.50</th><th>F1@.75</th><th>mIoU</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>VLM Detection Agent</td><td>30.9</td><td>67.5</td><td>42.4</td><td>78.6</td>
+                <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+              </tr>
+              <tr>
+                <td>+ Window Merging</td><td>28.9</td><td>69.9</td><td>40.9</td><td>75.6</td>
+                <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+              </tr>
+              <tr>
+                <td>+ Verification Agent</td><td>36.2</td><td>68.7</td><td>47.4</td><td>82.9</td>
+                <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+              </tr>
+              <tr>
+                <td>+ Spatial + Tracking</td><td>46.4</td><td>51.5</td><td>48.8</td><td>91.6</td>
+                <td>34.2</td><td>27.7</td><td>15.1</td><td>34.4</td>
+              </tr>
+              <tr>
+                <td>+ AI Confirmation</td><td>53.1</td><td>48.8</td><td>50.8</td><td>93.9</td>
+                <td>34.2</td><td>27.8</td><td>15.3</td><td>35.2</td>
+              </tr>
+              <tr>
+                <td class="highlight-col">+ Human Review</td>
+                <td class="highlight-col"><b>55.4</b></td><td class="highlight-col">48.6</td>
+                <td class="highlight-col"><b>51.8</b></td><td class="highlight-col"><b>94.4</b></td>
+                <td class="highlight-col"><b>34.2</b></td><td class="highlight-col"><b>27.8</b></td>
+                <td class="highlight-col"><b>15.3</b></td><td class="highlight-col"><b>35.2</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      -->
+    </div>
+  </section>
+
+  <!-- S15: Supplementary Videos -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Supplementary Videos</h2>
+        </div>
+      </div>
+
+      <!-- Annotation Tool Demo -->
+      <h3 class="title is-4">Annotation Tool Demo</h3>
+      <div class="content has-text-centered">
+        <video controls width="100%" preload="none" style="border-radius: 10px;">
+          <source src="static/assets/supp_material/annotation%20tool.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- VQA Examples -->
+      <h3 class="title is-4" style="margin-top: 2rem;">VQA Examples</h3>
+      <div class="columns">
+        <div class="column is-half">
+          <p class="has-text-centered has-text-weight-bold">Easy VQA</p>
+          <video controls width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/colon-becnh-VQA/easy%20VQA%20example.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-half">
+          <p class="has-text-centered has-text-weight-bold">Hard VQA</p>
+          <video controls width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/colon-becnh-VQA/hard%20VQA%20example.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <!-- Segmentation Comparison Sliders -->
+      <h3 class="title is-4" style="margin-top: 2rem;">Segmentation Examples</h3>
+      <p class="has-text-centered" style="margin-bottom: 1.5rem; color: #64748b; font-size: 0.95rem;">
+        <em>Drag the slider to compare segmentation masks with the original video.</em>
+      </p>
+
+      <div class="columns">
+        <div class="column is-one-third">
+          <div id="seg-compare-1" class="video-compare">
+            <div class="bal-after">
+              <video muted loop playsinline preload="none">
+                <source data-src="static/assets/supp_material/examples/segmentation/seg%204%20-%20no%20mask.mp4" type="video/mp4">
+              </video>
+              <div class="compare-label compare-label-right">Without Masks</div>
+            </div>
+            <div class="bal-before" style="width: 50%;">
+              <div class="bal-before-inset">
+                <video muted loop playsinline preload="none">
+                  <source data-src="static/assets/supp_material/examples/segmentation/seg%204%20mask.mp4" type="video/mp4">
+                </video>
+                <div class="compare-label compare-label-left">With Masks</div>
+              </div>
+            </div>
+            <div class="bal-handle" style="left: 50%;">
+              <span class="handle-left-arrow"></span>
+              <span class="handle-right-arrow"></span>
+            </div>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div id="seg-compare-2" class="video-compare">
+            <div class="bal-after">
+              <video muted loop playsinline preload="none">
+                <source data-src="static/assets/supp_material/examples/segmentation/seg7%20no%20masks.mp4" type="video/mp4">
+              </video>
+              <div class="compare-label compare-label-right">Without Masks</div>
+            </div>
+            <div class="bal-before" style="width: 50%;">
+              <div class="bal-before-inset">
+                <video muted loop playsinline preload="none">
+                  <source data-src="static/assets/supp_material/examples/segmentation/seg7%20mask.mp4" type="video/mp4">
+                </video>
+                <div class="compare-label compare-label-left">With Masks</div>
+              </div>
+            </div>
+            <div class="bal-handle" style="left: 50%;">
+              <span class="handle-left-arrow"></span>
+              <span class="handle-right-arrow"></span>
+            </div>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div id="seg-compare-3" class="video-compare">
+            <div class="bal-after">
+              <video muted loop playsinline preload="none">
+                <source data-src="static/assets/supp_material/examples/segmentation/seg%2012%20no%20masks.mp4" type="video/mp4">
+              </video>
+              <div class="compare-label compare-label-right">Without Masks</div>
+            </div>
+            <div class="bal-before" style="width: 50%;">
+              <div class="bal-before-inset">
+                <video muted loop playsinline preload="none">
+                  <source data-src="static/assets/supp_material/examples/segmentation/seg%2012%20mask.mp4" type="video/mp4">
+                </video>
+                <div class="compare-label compare-label-left">With Masks</div>
+              </div>
+            </div>
+            <div class="bal-handle" style="left: 50%;">
+              <span class="handle-left-arrow"></span>
+              <span class="handle-right-arrow"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Human Annotation Examples -->
+      <h3 class="title is-4" style="margin-top: 2rem;">Human Annotation Examples</h3>
+      <div class="carousel annotation-carousel">
+        <div class="annotation-example">
+          <span class="badge badge-accepted">Accepted</span>
+          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/human-annotation-examples/001-001-L%207%20accepted.mp4" type="video/mp4">
+          </video>
+          <div class="lesion-description">A small, sessile polyp is immediately visible on the right side of the colon wall at the start of the video. It is diminutive in size (approximately 3-5mm), pale pink to whitish in color, with a smooth surface and round shape. The polyp is later examined under narrow-band imaging (NBI) and then snared for removal.</div>
+        </div>
+        <div class="annotation-example">
+          <span class="badge badge-accepted">Accepted</span>
+          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/human-annotation-examples/001-001-L%209%20accepted.mp4" type="video/mp4">
+          </video>
+          <div class="lesion-description">At 13.0s, a classic angiodysplasia (vascular ectasia) becomes clearly visible on a mucosal fold. The lesion presents as a flat, bright red, well-demarcated patch characterized by a cluster of dilated, tortuous, fern-like submucosal blood vessels.</div>
+        </div>
+        <div class="annotation-example">
+          <span class="badge badge-rejected">Rejected</span>
+          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/human-annotation-examples/003-012-Lesion%3A%205%20of%2025-%20rejected.mp4" type="video/mp4">
+          </video>
+          <div class="lesion-description">A small sessile polyp is first clearly visible at 4.0s on the crest of a haustral fold in the upper central part of the view. It appears pale, measures approximately 3-5mm in diameter, and has a slightly granular surface. A second, smaller polypoid lesion is also visible adjacent to it on the left side of the same fold as the camera moves closer.</div>
+        </div>
+        <div class="annotation-example">
+          <span class="badge badge-accepted">Accepted</span>
+          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/human-annotation-examples/004-005-L%204%20accepted.mp4" type="video/mp4">
+          </video>
+          <div class="lesion-description">A pale, flat, sessile polyp becomes visible at 8.0s on the inferior wall (6 o'clock position) of the colon. The lesion is located on a haustral fold, appearing slightly elevated with a whitish/yellowish surface that contrasts with the surrounding pink vascular mucosa, features often associated with a sessile serrated lesion.</div>
+        </div>
+        <div class="annotation-example">
+          <span class="badge badge-rejected">Rejected</span>
+          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/human-annotation-examples/004-005-L%205%20rejected.mp4" type="video/mp4">
+          </video>
+          <div class="lesion-description">A localized mucosal abnormality is visible on the left wall of the colon (approximately 8 o'clock position) from the very beginning of the clip. It appears as a flat or slightly depressed lesion with a yellowish-white fibrinous base or mucus cap, surrounded by a faint erythematous rim, resembling a superficial ulcer, biopsy site, or a sessile serrated lesion.</div>
+        </div>
+        <div class="annotation-example">
+          <span class="badge badge-rejected">Rejected</span>
+          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/human-annotation-examples/004-006-L%201%20rejected.mp4" type="video/mp4">
+          </video>
+          <div class="lesion-description">A small, sessile, elevated lesion is immediately visible at 0.0s on the right colon wall, appearing as a smooth, dome-shaped mound with a distinct central depression (umbilication) and intact overlying vascular pattern, suggestive of a subepithelial lesion or neuroendocrine tumor.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S16: YouTube Placeholder (commented out) -->
+  <!--
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/PLACEHOLDER"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- S17: Related Links -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Related Links</h2>
+          <div class="content has-text-justified">
+            <p><a href="https://www.nature.com/articles/s41597-024-03359-0">REAL-COLON: A dataset for developing real-world AI applications in colonoscopy</a></p>
+            <p><a href="https://www.nature.com/articles/s41597-025-05588-3">CAS-COLON: Colonoscopy Anatomical Segmentation</a></p>
+            <p><a href="https://datasets.simula.no/kvasir-seg/">Kvasir-SEG: A Segmented Polyp Dataset</a></p>
+            <p><a href="https://github.com/facebookresearch/EdgeTAM">EdgeTAM: On-Device Track Anything Model</a></p>
+            <p><a href="https://ai.meta.com/sam3/">SAM 3: Segment Anything Model 3</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S18: BibTeX -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{hamdi2025colonbench,
+  title={Colon-Bench: An Agentic Workflow for Scalable Dense Lesion Annotation in Full-Procedure Colonoscopy Videos},
+  author={Hamdi, Abdullah and Yang, Changchun and Gao, Xin},
+  journal={arXiv preprint},
+  year={2025}
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- S19: Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="static/assets/colonbench.pdf">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/ajhamdi" class="external-link">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p style="text-align:center">
+              Source code mainly borrowed from <a href="https://keunhong.com/">Keunhong Park</a>'s <a
+                href="https://nerfies.github.io/">Nerfies website</a>.
+            </p>
+            <p style="text-align:center">
+              Please contact <a href="https://abdullahamdi.com/">Abdullah Hamdi</a> for feedback and questions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
