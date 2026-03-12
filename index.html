@@ -593,6 +593,183 @@
     </div>
   </section>
 
+  <!-- S15: Supplementary Videos -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Colon-Bench Video Examples</h2>
+        </div>
+      </div>
+
+      <!-- Annotation Tool Demo -->
+      <h3 class="title is-4">Annotation Tool Demo</h3>
+      <div class="content has-text-centered">
+        <video controls autoplay muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+          <source src="static/assets/supp_material/annotation%20tool.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- VQA Examples -->
+      <h3 class="title is-4" style="margin-top: 2rem;">VQA Examples</h3>
+      <div class="columns">
+        <div class="column is-half">
+          <p class="has-text-centered has-text-weight-bold">Prompted VQA</p>
+          <video controls autoplay muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/colon-becnh-VQA/easy%20VQA%20example.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-half">
+          <p class="has-text-centered has-text-weight-bold">Unprompted VQA</p>
+          <video controls autoplay muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/colon-becnh-VQA/hard%20VQA%20example.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <!-- Segmentation Comparison Sliders -->
+      <h3 class="title is-4" style="margin-top: 2rem;">Segmentation Examples</h3>
+      <p class="has-text-centered" style="margin-bottom: 1.5rem; color: #64748b; font-size: 0.95rem;">
+        <em>Drag the slider to compare segmentation masks with the original video.</em>
+      </p>
+
+      <div class="columns">
+        <div class="column is-one-third">
+          <div id="seg-compare-1" class="video-compare">
+            <div class="bal-after">
+              <video muted loop playsinline preload="none">
+                <source data-src="static/assets/supp_material/examples/segmentation/seg%204%20-%20no%20mask.mp4" type="video/mp4">
+              </video>
+              <div class="compare-label compare-label-right">Without Masks</div>
+            </div>
+            <div class="bal-before" style="width: 50%;">
+              <div class="bal-before-inset">
+                <video muted loop playsinline preload="none">
+                  <source data-src="static/assets/supp_material/examples/segmentation/seg%204%20mask.mp4" type="video/mp4">
+                </video>
+                <div class="compare-label compare-label-left">With Masks</div>
+              </div>
+            </div>
+            <div class="bal-handle" style="left: 50%;">
+              <span class="handle-left-arrow"></span>
+              <span class="handle-right-arrow"></span>
+            </div>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div id="seg-compare-2" class="video-compare">
+            <div class="bal-after">
+              <video muted loop playsinline preload="none">
+                <source data-src="static/assets/supp_material/examples/segmentation/seg7%20no%20masks.mp4" type="video/mp4">
+              </video>
+              <div class="compare-label compare-label-right">Without Masks</div>
+            </div>
+            <div class="bal-before" style="width: 50%;">
+              <div class="bal-before-inset">
+                <video muted loop playsinline preload="none">
+                  <source data-src="static/assets/supp_material/examples/segmentation/seg7%20mask.mp4" type="video/mp4">
+                </video>
+                <div class="compare-label compare-label-left">With Masks</div>
+              </div>
+            </div>
+            <div class="bal-handle" style="left: 50%;">
+              <span class="handle-left-arrow"></span>
+              <span class="handle-right-arrow"></span>
+            </div>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div id="seg-compare-3" class="video-compare">
+            <div class="bal-after">
+              <video muted loop playsinline preload="none">
+                <source data-src="static/assets/supp_material/examples/segmentation/seg%2012%20no%20masks.mp4" type="video/mp4">
+              </video>
+              <div class="compare-label compare-label-right">Without Masks</div>
+            </div>
+            <div class="bal-before" style="width: 50%;">
+              <div class="bal-before-inset">
+                <video muted loop playsinline preload="none">
+                  <source data-src="static/assets/supp_material/examples/segmentation/seg%2012%20mask.mp4" type="video/mp4">
+                </video>
+                <div class="compare-label compare-label-left">With Masks</div>
+              </div>
+            </div>
+            <div class="bal-handle" style="left: 50%;">
+              <span class="handle-left-arrow"></span>
+              <span class="handle-right-arrow"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Human Annotation Examples -->
+      <h3 class="title is-4" style="margin-top: 2rem;">Human Annotation Examples</h3>
+      <div class="carousel annotation-carousel">
+        <div class="annotation-example">
+          <span class="badge badge-accepted">Accepted</span>
+          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/human-annotation-examples/001-001-L%207%20accepted.mp4" type="video/mp4">
+          </video>
+          <div class="lesion-description">A small, sessile polyp is immediately visible on the right side of the colon wall at the start of the video. It is diminutive in size (approximately 3-5mm), pale pink to whitish in color, with a smooth surface and round shape. The polyp is later examined under narrow-band imaging (NBI) and then snared for removal.</div>
+        </div>
+        <div class="annotation-example">
+          <span class="badge badge-accepted">Accepted</span>
+          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/human-annotation-examples/001-001-L%209%20accepted.mp4" type="video/mp4">
+          </video>
+          <div class="lesion-description">At 13.0s, a classic angiodysplasia (vascular ectasia) becomes clearly visible on a mucosal fold. The lesion presents as a flat, bright red, well-demarcated patch characterized by a cluster of dilated, tortuous, fern-like submucosal blood vessels.</div>
+        </div>
+        <div class="annotation-example">
+          <span class="badge badge-rejected">Rejected</span>
+          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/human-annotation-examples/003-012-Lesion%3A%205%20of%2025-%20rejected.mp4" type="video/mp4">
+          </video>
+          <div class="lesion-description">A small sessile polyp is first clearly visible at 4.0s on the crest of a haustral fold in the upper central part of the view. It appears pale, measures approximately 3-5mm in diameter, and has a slightly granular surface. A second, smaller polypoid lesion is also visible adjacent to it on the left side of the same fold as the camera moves closer.</div>
+        </div>
+        <div class="annotation-example">
+          <span class="badge badge-accepted">Accepted</span>
+          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/human-annotation-examples/004-005-L%204%20accepted.mp4" type="video/mp4">
+          </video>
+          <div class="lesion-description">A pale, flat, sessile polyp becomes visible at 8.0s on the inferior wall (6 o'clock position) of the colon. The lesion is located on a haustral fold, appearing slightly elevated with a whitish/yellowish surface that contrasts with the surrounding pink vascular mucosa, features often associated with a sessile serrated lesion.</div>
+        </div>
+        <div class="annotation-example">
+          <span class="badge badge-rejected">Rejected</span>
+          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/human-annotation-examples/004-005-L%205%20rejected.mp4" type="video/mp4">
+          </video>
+          <div class="lesion-description">A localized mucosal abnormality is visible on the left wall of the colon (approximately 8 o'clock position) from the very beginning of the clip. It appears as a flat or slightly depressed lesion with a yellowish-white fibrinous base or mucus cap, surrounded by a faint erythematous rim, resembling a superficial ulcer, biopsy site, or a sessile serrated lesion.</div>
+        </div>
+        <div class="annotation-example">
+          <span class="badge badge-rejected">Rejected</span>
+          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
+            <source src="static/assets/supp_material/examples/human-annotation-examples/004-006-L%201%20rejected.mp4" type="video/mp4">
+          </video>
+          <div class="lesion-description">A small, sessile, elevated lesion is immediately visible at 0.0s on the right colon wall, appearing as a smooth, dome-shaped mound with a distinct central depression (umbilication) and intact overlying vascular pattern, suggestive of a subepithelial lesion or neuroendocrine tumor.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S16: YouTube Placeholder (commented out) -->
+  <!--
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/PLACEHOLDER"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+
   <!-- S13: Colon-Skill -->
   <section class="section colon-skill-section">
     <div class="container is-max-desktop">
@@ -747,183 +924,6 @@
       -->
     </div>
   </section>
-
-  <!-- S15: Supplementary Videos -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column">
-          <h2 class="title is-3">Supplementary Videos</h2>
-        </div>
-      </div>
-
-      <!-- Annotation Tool Demo -->
-      <h3 class="title is-4">Annotation Tool Demo</h3>
-      <div class="content has-text-centered">
-        <video controls width="100%" preload="none" style="border-radius: 10px;">
-          <source src="static/assets/supp_material/annotation%20tool.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <!-- VQA Examples -->
-      <h3 class="title is-4" style="margin-top: 2rem;">VQA Examples</h3>
-      <div class="columns">
-        <div class="column is-half">
-          <p class="has-text-centered has-text-weight-bold">Easy VQA</p>
-          <video controls width="100%" preload="none" style="border-radius: 10px;">
-            <source src="static/assets/supp_material/examples/colon-becnh-VQA/easy%20VQA%20example.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-half">
-          <p class="has-text-centered has-text-weight-bold">Hard VQA</p>
-          <video controls width="100%" preload="none" style="border-radius: 10px;">
-            <source src="static/assets/supp_material/examples/colon-becnh-VQA/hard%20VQA%20example.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-
-      <!-- Segmentation Comparison Sliders -->
-      <h3 class="title is-4" style="margin-top: 2rem;">Segmentation Examples</h3>
-      <p class="has-text-centered" style="margin-bottom: 1.5rem; color: #64748b; font-size: 0.95rem;">
-        <em>Drag the slider to compare segmentation masks with the original video.</em>
-      </p>
-
-      <div class="columns">
-        <div class="column is-one-third">
-          <div id="seg-compare-1" class="video-compare">
-            <div class="bal-after">
-              <video muted loop playsinline preload="none">
-                <source data-src="static/assets/supp_material/examples/segmentation/seg%204%20-%20no%20mask.mp4" type="video/mp4">
-              </video>
-              <div class="compare-label compare-label-right">Without Masks</div>
-            </div>
-            <div class="bal-before" style="width: 50%;">
-              <div class="bal-before-inset">
-                <video muted loop playsinline preload="none">
-                  <source data-src="static/assets/supp_material/examples/segmentation/seg%204%20mask.mp4" type="video/mp4">
-                </video>
-                <div class="compare-label compare-label-left">With Masks</div>
-              </div>
-            </div>
-            <div class="bal-handle" style="left: 50%;">
-              <span class="handle-left-arrow"></span>
-              <span class="handle-right-arrow"></span>
-            </div>
-          </div>
-        </div>
-        <div class="column is-one-third">
-          <div id="seg-compare-2" class="video-compare">
-            <div class="bal-after">
-              <video muted loop playsinline preload="none">
-                <source data-src="static/assets/supp_material/examples/segmentation/seg7%20no%20masks.mp4" type="video/mp4">
-              </video>
-              <div class="compare-label compare-label-right">Without Masks</div>
-            </div>
-            <div class="bal-before" style="width: 50%;">
-              <div class="bal-before-inset">
-                <video muted loop playsinline preload="none">
-                  <source data-src="static/assets/supp_material/examples/segmentation/seg7%20mask.mp4" type="video/mp4">
-                </video>
-                <div class="compare-label compare-label-left">With Masks</div>
-              </div>
-            </div>
-            <div class="bal-handle" style="left: 50%;">
-              <span class="handle-left-arrow"></span>
-              <span class="handle-right-arrow"></span>
-            </div>
-          </div>
-        </div>
-        <div class="column is-one-third">
-          <div id="seg-compare-3" class="video-compare">
-            <div class="bal-after">
-              <video muted loop playsinline preload="none">
-                <source data-src="static/assets/supp_material/examples/segmentation/seg%2012%20no%20masks.mp4" type="video/mp4">
-              </video>
-              <div class="compare-label compare-label-right">Without Masks</div>
-            </div>
-            <div class="bal-before" style="width: 50%;">
-              <div class="bal-before-inset">
-                <video muted loop playsinline preload="none">
-                  <source data-src="static/assets/supp_material/examples/segmentation/seg%2012%20mask.mp4" type="video/mp4">
-                </video>
-                <div class="compare-label compare-label-left">With Masks</div>
-              </div>
-            </div>
-            <div class="bal-handle" style="left: 50%;">
-              <span class="handle-left-arrow"></span>
-              <span class="handle-right-arrow"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Human Annotation Examples -->
-      <h3 class="title is-4" style="margin-top: 2rem;">Human Annotation Examples</h3>
-      <div class="carousel annotation-carousel">
-        <div class="annotation-example">
-          <span class="badge badge-accepted">Accepted</span>
-          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
-            <source src="static/assets/supp_material/examples/human-annotation-examples/001-001-L%207%20accepted.mp4" type="video/mp4">
-          </video>
-          <div class="lesion-description">A small, sessile polyp is immediately visible on the right side of the colon wall at the start of the video. It is diminutive in size (approximately 3-5mm), pale pink to whitish in color, with a smooth surface and round shape. The polyp is later examined under narrow-band imaging (NBI) and then snared for removal.</div>
-        </div>
-        <div class="annotation-example">
-          <span class="badge badge-accepted">Accepted</span>
-          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
-            <source src="static/assets/supp_material/examples/human-annotation-examples/001-001-L%209%20accepted.mp4" type="video/mp4">
-          </video>
-          <div class="lesion-description">At 13.0s, a classic angiodysplasia (vascular ectasia) becomes clearly visible on a mucosal fold. The lesion presents as a flat, bright red, well-demarcated patch characterized by a cluster of dilated, tortuous, fern-like submucosal blood vessels.</div>
-        </div>
-        <div class="annotation-example">
-          <span class="badge badge-rejected">Rejected</span>
-          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
-            <source src="static/assets/supp_material/examples/human-annotation-examples/003-012-Lesion%3A%205%20of%2025-%20rejected.mp4" type="video/mp4">
-          </video>
-          <div class="lesion-description">A small sessile polyp is first clearly visible at 4.0s on the crest of a haustral fold in the upper central part of the view. It appears pale, measures approximately 3-5mm in diameter, and has a slightly granular surface. A second, smaller polypoid lesion is also visible adjacent to it on the left side of the same fold as the camera moves closer.</div>
-        </div>
-        <div class="annotation-example">
-          <span class="badge badge-accepted">Accepted</span>
-          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
-            <source src="static/assets/supp_material/examples/human-annotation-examples/004-005-L%204%20accepted.mp4" type="video/mp4">
-          </video>
-          <div class="lesion-description">A pale, flat, sessile polyp becomes visible at 8.0s on the inferior wall (6 o'clock position) of the colon. The lesion is located on a haustral fold, appearing slightly elevated with a whitish/yellowish surface that contrasts with the surrounding pink vascular mucosa, features often associated with a sessile serrated lesion.</div>
-        </div>
-        <div class="annotation-example">
-          <span class="badge badge-rejected">Rejected</span>
-          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
-            <source src="static/assets/supp_material/examples/human-annotation-examples/004-005-L%205%20rejected.mp4" type="video/mp4">
-          </video>
-          <div class="lesion-description">A localized mucosal abnormality is visible on the left wall of the colon (approximately 8 o'clock position) from the very beginning of the clip. It appears as a flat or slightly depressed lesion with a yellowish-white fibrinous base or mucus cap, surrounded by a faint erythematous rim, resembling a superficial ulcer, biopsy site, or a sessile serrated lesion.</div>
-        </div>
-        <div class="annotation-example">
-          <span class="badge badge-rejected">Rejected</span>
-          <video muted loop playsinline width="100%" preload="none" style="border-radius: 10px;">
-            <source src="static/assets/supp_material/examples/human-annotation-examples/004-006-L%201%20rejected.mp4" type="video/mp4">
-          </video>
-          <div class="lesion-description">A small, sessile, elevated lesion is immediately visible at 0.0s on the right colon wall, appearing as a smooth, dome-shaped mound with a distinct central depression (umbilication) and intact overlying vascular pattern, suggestive of a subepithelial lesion or neuroendocrine tumor.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- S16: YouTube Placeholder (commented out) -->
-  <!--
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Video</h2>
-          <div class="publication-video">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/PLACEHOLDER"
-              title="YouTube video player" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  -->
 
   <!-- S17: Related Links -->
   <section class="section">
