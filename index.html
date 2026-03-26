@@ -182,38 +182,6 @@
     </div>
   </section>
 
-  <!-- S6: Pipeline Overview -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Pipeline Overview</h2>
-        </div>
-      </div>
-      <div class="content has-text-centered">
-        <img class="figure-img" src="static/assets/pipeline/pipeline.png" alt="Colon-Bench Pipeline" width="100%">
-      </div>
-      <div class="columns is-centered">
-        <div class="column is-four-fifths">
-          <div class="content has-text-justified">
-            <p>
-              The Colon-Bench annotation pipeline operates in <b>three phases</b>:
-              <b>(1) Temporal Proposals:</b> A VLM detection agent scans full-procedure colonoscopy videos to identify
-              candidate lesion windows.
-              <b>(2) Spatial Annotation:</b> Bounding-box tracking via EdgeTAM and AI-driven confirmation with visual
-              cues add dense spatial annotations while progressively filtering false positives.
-              <b>(3) Human-in-the-Loop Review:</b> A reviewing physician validates the pre-rendered clips with spatial
-              overlays, rejecting only 11.6% of presented windows, demonstrating strong agreement with the AI filters.
-              The accepted annotations are then used to create a comprehensive Colon-Bench for MLLMs evaluations, covering
-              multiple video tasks: Visual Question Answering (VQA), binary lesion classification, and Open-Vocabulary
-              Video Object Segmentation (OV-VOS).
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- S7: Pipeline Video (commented out)
   <section class="section">
     <div class="container is-max-desktop">
@@ -587,6 +555,38 @@
             <p><em>Colon-Bench Qualitative Segmentation Comparisons. Each row shows a different colonoscopy video frame: (1) erythematous region, (2) tumor, (3) bleeding, (4) sessile polyp, (5) angiectasia. Columns show the input, ground-truth mask overlay, and predicted mask overlays from each model (including SAM2). Masks are overlaid as semi-transparent purple regions.</em></p>
             <img class="figure-img" src="static/assets/comparison/qualitiive-segmentation.png"
               alt="Segmentation Comparisons" width="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Annotation Pipeline Overview -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Annotation Pipeline Overview</h2>
+        </div>
+      </div>
+      <div class="content has-text-centered">
+        <img class="figure-img" src="static/assets/pipeline/pipeline.png" alt="Colon-Bench Pipeline" width="100%">
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              The Colon-Bench annotation pipeline operates in <b>three phases</b>:
+              <b>(1) Temporal Proposals:</b> A VLM detection agent scans full-procedure colonoscopy videos to identify
+              candidate lesion windows.
+              <b>(2) Spatial Annotation:</b> Bounding-box tracking via EdgeTAM and AI-driven confirmation with visual
+              cues add dense spatial annotations while progressively filtering false positives.
+              <b>(3) Human-in-the-Loop Review:</b> A reviewing physician validates the pre-rendered clips with spatial
+              overlays, rejecting only 11.6% of presented windows, demonstrating strong agreement with the AI filters.
+              The accepted annotations are then used to create a comprehensive Colon-Bench for MLLMs evaluations, covering
+              multiple video tasks: Visual Question Answering (VQA), binary lesion classification, and Open-Vocabulary
+              Video Object Segmentation (OV-VOS).
+            </p>
           </div>
         </div>
       </div>
