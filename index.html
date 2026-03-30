@@ -78,6 +78,53 @@
                     <span>Code</span>
                   </a>
                 </span>
+                <!-- Leaderboard Link -->
+                <span class="link-block">
+                  <a href="#leaderboard" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-trophy" style="color: #FFD700;"></i></span>
+                    <span>Leaderboard</span>
+                  </a>
+                </span>
+              </div>
+
+              <!-- Section Navigation Tags -->
+              <div class="publication-links" style="margin-top: 0.5rem;">
+                <span class="link-block">
+                  <a href="#statistics" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-chart-pie" style="color: #E91E63;"></i></span>
+                    <span>Statistics</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#dataset-comparison" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-table" style="color: #00BCD4;"></i></span>
+                    <span>Dataset Comparison</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#results-visualization" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-chart-bar" style="color: #4CAF50;"></i></span>
+                    <span>Results</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#pipeline" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-cogs" style="color: #3F51B5;"></i></span>
+                    <span>Pipeline</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#examples" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-video" style="color: #F44336;"></i></span>
+                    <span>Examples</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#colon-skill" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-code" style="color: #9C27B0;"></i></span>
+                    <span>Colon-Skill</span>
+                  </a>
+                </span>
               </div>
             </div>
           </div>
@@ -105,7 +152,7 @@
   </section>
 
   <!-- S4: Key Statistics -->
-  <section class="section stats-section">
+  <section class="section stats-section" id="statistics">
     <div class="container is-max-desktop">
       <div class="columns is-multiline is-centered has-text-centered">
         <div class="column is-2">
@@ -197,7 +244,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column">
-          <h2 class="title is-3">Dataset Comparison</h2>
+          <h2 class="title is-3" id="dataset-comparison">Dataset Comparison</h2>
           <p class="subtitle is-6">Table 1. Colon-Bench provides a broader lesion taxonomy and richer supervision compared to prior colonoscopy datasets.</p>
         </div>
       </div>
@@ -258,7 +305,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Lesion Categories</h2>
+          <h2 class="title is-3" id="lesion-categories">Lesion Categories</h2>
         </div>
       </div>
       <div class="columns is-centered">
@@ -352,7 +399,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column">
-          <h2 class="title is-3">Colon-Bench Leaderboard</h2>
+          <h2 class="title is-3" id="leaderboard">Colon-Bench Leaderboard</h2>
           <p class="subtitle is-6">Summary of model performance across the four benchmark tasks: visual prompted and unprompted video Visual Question Answering (VQA) accuracy (with visual box prompts and without them), binary lesion classification precision/recall/F1, and open-vocabulary video segmentation IoU/Dice. The video segmentation is based on 3 box detections from each MLLM prompting the same EdgeTAM tracker. Best scores per metric are shown in <span class="best-score">bold green</span>.</p>
         </div>
       </div>
@@ -480,7 +527,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column">
-          <h2 class="title is-3">Results Visualization</h2>
+          <h2 class="title is-3" id="results-visualization">Results Visualization</h2>
         </div>
       </div>
       <div class="tabs is-centered is-boxed is-medium" id="results-tabs">
@@ -525,7 +572,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column">
-          <h2 class="title is-3">Comparisons</h2>
+          <h2 class="title is-3" id="comparisons">Comparisons</h2>
         </div>
       </div>
       <div class="tabs is-centered is-boxed is-medium" id="comparisons-tabs">
@@ -558,7 +605,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Annotation Pipeline Overview</h2>
+          <h2 class="title is-3" id="pipeline">Annotation Pipeline Overview</h2>
         </div>
       </div>
       <div class="content has-text-centered">
@@ -590,7 +637,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column">
-          <h2 class="title is-3">Colon-Bench Video Examples</h2>
+          <h2 class="title is-3" id="examples">Colon-Bench Video Examples</h2>
         </div>
       </div>
 
@@ -767,7 +814,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Colon-Skill</h2>
+          <h2 class="title is-3" id="colon-skill">Colon-Skill</h2>
           <p class="subtitle is-6">
             We analyze common VQA errors from MLLMs to construct a novel <b>colon-skill</b> prompting strategy &mdash;
             a structured <code>SKILL.md</code> context file extracted by analyzing error patterns across lesion categories
