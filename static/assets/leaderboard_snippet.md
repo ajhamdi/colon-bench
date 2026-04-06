@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr><td>CLIP</td><td>—</td><td>—</td><td>34.7</td><td>34.5</td><td>100</td><td>51.3</td><td>—</td><td>—</td></tr>
+    <tr><td>CLIP</td><td>—</td><td>—</td><td>34.7</td><td>34.5</td><td><b>100</b></td><td>51.3</td><td>—</td><td>—</td></tr>
     <tr><td>ViCLIP</td><td>—</td><td>—</td><td>35.8</td><td>34.8</td><td>98.5</td><td>51.4</td><td>—</td><td>—</td></tr>
     <tr><td>Endo-CLIP</td><td>—</td><td>—</td><td>52.9</td><td>41.9</td><td>95.2</td><td>58.2</td><td>—</td><td>—</td></tr>
     <tr><td>Colon-ViCLIP</td><td>—</td><td>—</td><td>64.4</td><td>49.0</td><td>84.2</td><td>62.0</td><td>—</td><td>—</td></tr>
@@ -24,7 +24,7 @@
     <tr><td>Claude Opus 4.6</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>16.1</td><td>20.5</td></tr>
     <tr><td>GPT-5.2</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>30.7</td><td>36.5</td></tr>
     <tr><td>GPT-5.4</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>34.5</td><td>41.1</td></tr>
-    <tr><td>Qwen3-VL 8B</td><td>32.9</td><td>38.3</td><td>34.4</td><td>34.4</td><td>100</td><td>51.2</td><td>10.4</td><td>13.1</td></tr>
+    <tr><td>Qwen3-VL 8B</td><td>32.9</td><td>38.3</td><td>34.4</td><td>34.4</td><td><b>100</b></td><td>51.2</td><td>10.4</td><td>13.1</td></tr>
     <tr><td>Seed 1.6 Flash</td><td>38.1</td><td>45.4</td><td>72.9</td><td><b>94.2</b></td><td>24.3</td><td>38.6</td><td>2.6</td><td>3.5</td></tr>
     <tr><td>Qwen-VL Max</td><td>39.1</td><td>45.4</td><td>65.6</td><td>0.0</td><td>0.0</td><td>0.0</td><td>25.6</td><td>29.6</td></tr>
     <tr><td>Qwen3-VL 32B</td><td>39.3</td><td>44.4</td><td>65.6</td><td>0.0</td><td>0.0</td><td>0.0</td><td>12.7</td><td>15.9</td></tr>
