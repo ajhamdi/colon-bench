@@ -1,18 +1,29 @@
-name: Update leaderboard markdown
+# Refresh the local leaderboard fallback snapshot from the canonical source
+# in ajhamdi/colon-bench-eval. The website fetches that remote CSV live at
+# page load; this workflow keeps the local copy + MD snippet in lazy sync
+# so everything still works if GitHub raw is unreachable.
+
+name: Refresh leaderboard fallback from eval repo
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'static/assets/leaderboard.csv'
+  workflow_dispatch:
+  schedule:
+    # daily at 06:00 UTC
+    - cron: '0 6 * * *'
 
 jobs:
-  regenerate-md:
+  refresh-fallback:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
+
+      - name: Pull canonical leaderboard.csv from colon-bench-eval
+        run: |
+          curl -fsSL \
+            https://raw.githubusercontent.com/ajhamdi/colon-bench-eval/main/leaderboard.csv \
+            -o static/assets/leaderboard.csv
 
       - uses: actions/setup-python@v5
         with:
@@ -25,8 +36,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git diff --quiet static/assets/leaderboard_snippet.md || {
-            git add static/assets/leaderboard_snippet.md
-            git commit -m "Auto-update leaderboard_snippet.md from CSV"
+          if ! git diff --quiet static/assets/leaderboard.csv static/assets/leaderboard_snippet.md; then
+            git add static/assets/leaderboard.csv static/assets/leaderboard_snippet.md
+            git commit -m "Refresh leaderboard fallback from colon-bench-eval"
             git push
-          }
+          fi

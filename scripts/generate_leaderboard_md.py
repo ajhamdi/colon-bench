@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
-"""Generate leaderboard_snippet.md from leaderboard.csv.
+"""Generate leaderboard_snippet.md from the local leaderboard.csv.
 
-Run after editing leaderboard.csv to keep the Markdown table in sync:
+The canonical leaderboard lives in ajhamdi/colon-bench-eval and is what the
+website fetches live at page load. The local static/assets/leaderboard.csv
+is a fallback snapshot, refreshed daily by
+.github/workflows/update-leaderboard.yml (which curls the canonical CSV
+and then reruns this script).
+
+Run manually after a local edit if you need to regenerate the snippet:
     python scripts/generate_leaderboard_md.py
 """
 
