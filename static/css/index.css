@@ -163,6 +163,11 @@ body {
   border-radius: 4px;
 }
 
+/* Keep the best-score green text in the shaded AVG column */
+.bench-table tbody td.highlight-col.best-score {
+  color: #15803d !important;
+}
+
 .table-separator td {
   padding: 0 !important;
   background: linear-gradient(90deg, #16213e, #e94560, #16213e) !important;

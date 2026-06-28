@@ -412,7 +412,7 @@
               <th colspan="2">VQA Accuracy</th>
               <th colspan="4">Lesion Classification</th>
               <th colspan="2">Segmentation</th>
-              <th rowspan="2">AVG</th>
+              <th rowspan="2" class="highlight-col">AVG</th>
             </tr>
             <tr>
               <th>Prompted</th>
@@ -1020,14 +1020,15 @@
           }
           tr.appendChild(td);
         });
-        // AVG column
+        // AVG column (shaded via highlight-col to set it apart)
         var avgTd = document.createElement('td');
+        avgTd.className = 'highlight-col';
         if (cols.avg === null) {
           avgTd.innerHTML = '&mdash;';
         } else {
           avgTd.textContent = cols.avg.toFixed(1);
           if (maxAvg !== null && cols.avg === maxAvg) {
-            avgTd.className = 'best-score';
+            avgTd.className += ' best-score';
           }
         }
         tr.appendChild(avgTd);
