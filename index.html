@@ -401,7 +401,7 @@
       <div class="columns is-centered has-text-centered">
         <div class="column">
           <h2 class="title is-3" id="leaderboard">Colon-Bench Leaderboard</h2>
-          <p class="subtitle is-6">Summary of model performance across the four benchmark tasks: visual prompted and unprompted video Visual Question Answering (VQA) accuracy (with visual box prompts and without them), binary lesion classification precision/recall/F1, and open-vocabulary video segmentation IoU/Dice. The video segmentation is based on 3 box detections from each MLLM prompting the same EdgeTAM tracker. Best scores per metric are shown in <span class="best-score">bold green</span>.</p>
+          <p class="subtitle is-6">Summary of model performance across the four benchmark tasks: visual prompted and unprompted video Visual Question Answering (VQA) accuracy (with visual box prompts and without them), binary lesion classification precision/recall/F1, and open-vocabulary video segmentation IoU/Dice. The video segmentation is based on 3 box detections from each MLLM prompting the same EdgeTAM tracker. The <b>AVG</b> column is the mean of the four headline metrics &mdash; VQA Prompted, VQA Unprompted, classification F1, and segmentation IoU &mdash; computed only for models that report all four (otherwise shown as &mdash;). Rows are sorted by AVG from lowest to highest, with models missing an AVG kept at the top in their original order. Best scores per metric are shown in <span class="best-score">bold green</span>.</p>
         </div>
       </div>
       <div class="table-container">
@@ -412,6 +412,7 @@
               <th colspan="2">VQA Accuracy</th>
               <th colspan="4">Lesion Classification</th>
               <th colspan="2">Segmentation</th>
+              <th rowspan="2">AVG</th>
             </tr>
             <tr>
               <th>Prompted</th>
@@ -970,6 +971,26 @@
         // handle commas inside quoted fields (not expected, but safe)
         return l.split(',');
       });
+      // AVG = mean of VQA Prompted (1), VQA Unprompted (2), Cls. F1 (6),
+      // Seg. IoU (7); only defined when all four are present.
+      var AVG_COLS = [1, 2, 6, 7];
+      function computeAvg(cols) {
+        var nums = AVG_COLS.map(function (ci) { return cols[ci]; });
+        if (nums.some(function (v) { return v === '—' || v === '' || isNaN(Number(v)); })) {
+          return null;
+        }
+        var sum = nums.reduce(function (a, v) { return a + Number(v); }, 0);
+        return sum / AVG_COLS.length;
+      }
+      rows.forEach(function (cols) { cols.avg = computeAvg(cols); });
+
+      // Sort by AVG lowest to highest; rows without an AVG stay first, in
+      // their original order.
+      var withAvg = rows.filter(function (r) { return r.avg !== null; });
+      var withoutAvg = rows.filter(function (r) { return r.avg === null; });
+      withAvg.sort(function (a, b) { return a.avg - b.avg; });
+      rows = withoutAvg.concat(withAvg);
+
       // columns 1-8 are numeric metrics; find max per column (ignoring "—")
       var metricCols = [1, 2, 3, 4, 5, 6, 7, 8];
       var maxVals = {};
@@ -979,6 +1000,9 @@
           .map(Number);
         maxVals[ci] = Math.max.apply(null, nums);
       });
+      var avgNums = withAvg.map(function (r) { return r.avg; });
+      var maxAvg = avgNums.length ? Math.max.apply(null, avgNums) : null;
+
       var tbody = document.getElementById('leaderboard-body');
       rows.forEach(function (cols) {
         var tr = document.createElement('tr');
@@ -996,6 +1020,17 @@
           }
           tr.appendChild(td);
         });
+        // AVG column
+        var avgTd = document.createElement('td');
+        if (cols.avg === null) {
+          avgTd.innerHTML = '&mdash;';
+        } else {
+          avgTd.textContent = cols.avg.toFixed(1);
+          if (maxAvg !== null && cols.avg === maxAvg) {
+            avgTd.className = 'best-score';
+          }
+        }
+        tr.appendChild(avgTd);
         tbody.appendChild(tr);
       });
     });
